@@ -21,6 +21,16 @@ import Header from '@/components/Header.vue';
 </script>
 
 <style lang="scss">
+.el-table__header-wrapper {
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(0turn, rgb(239 239 239 / 50%), rgb(225 225 225), rgba(56, 2, 155, 0));
+    border-image-slice: 1;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -41,6 +51,12 @@ body {
     color: #2c3e50;
 }
 
+.mr-4 {
+    margin-right: 4px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
 .mr-32 {
     margin-right: 32px;
 }
@@ -49,6 +65,7 @@ body {
     height: 100px;
     background: #F2F0F0;
     padding: 0 100px !important;
+    border-radius: 0 0 16px 16px !important;
 
     &__logo {
         color: #0E2E3B;
@@ -71,7 +88,9 @@ body {
         }
     }
 }
-
+.w-full {
+    width: 100%;
+}
 .flex {
     display: -webkit-box;
     display: -webkit-flex;

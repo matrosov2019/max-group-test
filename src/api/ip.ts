@@ -1,6 +1,7 @@
+import axios from 'axios';
+
 const getIpInfo = async (ip: string) => {
-    const response = await fetch(`http://ip-api.com/json/${ip}`);
-    console.log('response: ', response);
+    return axios(`http://ip-api.com/json/${ip}`);
 };
 export {
     getIpInfo
