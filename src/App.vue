@@ -3,69 +3,31 @@
     <div class="common-layout">
         <el-container>
             <el-header class="flex flex-row flex-align-item-center header flex-justify-between">
-                <div class="flex flex-none header__logo">
-                    IP-PN.COM
-                </div>
-                <div class="flex flex-none">
-                    <el-input
-                        class="header__input-search"
-                        v-model="search"
-                        @keyup.enter="onSearch"
-                        style="width: 460px;"
-                        size="large"
-                        placeholder="95.213.138.174"
-                        :prefix-icon="Search"
-                    />
-                </div>
-                <div class="flex flex-row gap-2">
-                    <div class="flex flex-none header__link mr-32">
-                        Documentation
-                    </div>
-                    <div class="flex flex-none header__link mr-32">
-                        Contacts
-                    </div>
-                    <div class="flex flex-none header__link">
-                        <b>Log in</b>
-                    </div>
-                </div>
+                <Header />
             </el-header>
             <el-main class="main">
-                <router-view/>
+                <router-view />
             </el-main>
         </el-container>
     </div>
-
- <!-- TODO -->
-
     <!--
-    <country-flag country='it' size='big'/>
-    <el-button>I am ElButton</el-button>
-    -->
-  <!--
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  -->
-  <!--<router-view/>-->
+       <country-flag country='it' size='big'/>
+      -->
 </template>
 
 <script setup lang="ts">
-import { ElInput, ElContainer, ElMain } from 'element-plus';
-import { Search } from '@element-plus/icons-vue';
-import {ref} from "vue";
-const search = ref("");
-
-const onSearch = () => {
-    console.log("onSearch", search.value);
-}
+import { ElContainer, ElHeader, ElMain } from 'element-plus';
+import Header from '@/components/Header.vue';
 </script>
 
 <style lang="scss">
 body {
     padding: 0;
     margin: 0;
+    font-family: Inter, 'Helvetica Neue', Helvetica, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 }
+
 .main {
     padding: 80px 100px !important;
 }
@@ -73,10 +35,10 @@ body {
 #app {
     font-family: Inter, 'Helvetica Neue', Helvetica, 'PingFang SC',
     'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
 
 .mr-32 {
@@ -87,19 +49,23 @@ body {
     height: 100px;
     background: #F2F0F0;
     padding: 0 100px !important;
+
     &__logo {
         color: #0E2E3B;
         font-weight: 600;
         font-size: 24px;
         line-height: 32px;
     }
+
     &__input-search {
         margin-left: 20px;
         width: 460px;
     }
+
     &__link {
         transition: 0.3s all;
         cursor: pointer;
+
         &:hover {
             opacity: 0.7;
         }

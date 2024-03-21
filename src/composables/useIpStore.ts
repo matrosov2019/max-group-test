@@ -1,17 +1,14 @@
-import { defineStore } from 'pinia'
-import { TIpItem } from '@/types/TIpItem'
+import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
 
-export const useIpStore = defineStore('ip', {
-    state: () => {
-        return {
-            list: [] as TIpItem[]
-        }
-    },
-    getters: {
-        // automatically infers the return type as a number
-        ipList(state) {
-            return state.list;
-        }
-    }
-})
+export const useIpStore = defineStore('ip', () => {
+    const ipList = ref<Record<string, boolean>>({});
+    const addIp = (ip: string) => {
+        ipList.value[ip] = true;
+    };
+    const actualIpList = computed(() => {
+        return Object.keys(ipList.value);
+    });
+    return { addIp, actualIpList, ipList };
+});
 
