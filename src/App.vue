@@ -10,9 +10,6 @@
             </el-main>
         </el-container>
     </div>
-    <!--
-       <country-flag country='it' size='big'/>
-      -->
 </template>
 
 <script setup lang="ts">
