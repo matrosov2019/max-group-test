@@ -27,7 +27,9 @@
                                 IP
                             </div>
                             <div class="flex flex-none">
-                                <el-tag type="danger" style="cursor: pointer">Удалить выбранные</el-tag>
+                                <el-tag type="danger" style="cursor: pointer" v-if="multipleSelection?.length"
+                                        @click="deleteItems">Удалить выбранные
+                                </el-tag>
                             </div>
                         </div>
                     </template>
@@ -163,6 +165,9 @@ import { getIpInfo } from '@/api/ip';
 import { useDebounceFn, useClipboard } from '@vueuse/core';
 import { useRouter } from 'vue-router';
 
+const emit = defineEmits<{
+    moveToAdd: []
+}>();
 const source = ref('');
 const { copy, copied } = useClipboard({ source });
 const router = useRouter();
@@ -175,8 +180,25 @@ const deleteItem = (ip: string) => {
     ipStore.deleteIp(ip);
     ElMessage({
         message: `IP: ${ip} был удален!`,
-        type: 'success',
+        type: 'success'
     });
+    if (!ipStore.actualIpList.length) {
+        emit("moveToAdd");
+    }
+};
+
+const deleteItems = () => {
+    for (const item of multipleSelection.value) {
+        //@ts-ignore
+        ipStore.deleteIp(item.ip);
+    }
+    ElMessage({
+        message: `Выделенные ip были удалены!`,
+        type: 'success'
+    });
+    if (!ipStore.actualIpList.length) {
+        emit("moveToAdd");
+    }
 };
 
 const openDetail = (ip: string) => {
@@ -258,7 +280,7 @@ const init = async () => {
     }
     const promises = await Promise.allSettled(arrPromises);
     for (const promise of promises) {
-        //TODO Fixit
+        //TODO Обернуть в промис, который возращает всегда IP, и уже данные запроса
         //@ts-ignore
         const ip = promise?.value?.config.url.replace('http://ip-api.com/json/', '');
         if (promise.status === 'fulfilled') {

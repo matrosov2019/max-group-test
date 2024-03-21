@@ -1,6 +1,6 @@
 <template>
     <AddingListIpAddresses @success="state = 'table'" v-if="state === 'add'"/>
-    <TableIpAddresses v-if="state === 'table'"/>
+    <TableIpAddresses v-if="state === 'table'" @moveToAdd="state = 'add'"/>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
